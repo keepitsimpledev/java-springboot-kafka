@@ -12,7 +12,9 @@ jobs:
 
     - name: install java
       run: |
-        sudo apt update # as always
-        sudo apt install openjdk-18-jdk-headless
+        sudo apt-get update # as always
+        sudo apt-get install -y openjdk-18-jdk-headless
+        echo "java -version"
         java -version # confirmation
+        echo "javac -version"
         javac -version # confirmation
