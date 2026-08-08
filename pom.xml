@@ -7,10 +7,15 @@
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>4.1.0</version>
 	</parent>
-	<groupId>com.tbd</groupId>
-	<artifactId>name_tbd</artifactId>
+	<groupId>com.exploration</groupId>
+	<artifactId>exploration</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<!-- Additional lines to be added here... -->
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
+		</dependency>
+	</dependencies>
 
 </project>
