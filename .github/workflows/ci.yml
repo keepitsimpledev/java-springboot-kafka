@@ -24,4 +24,9 @@ jobs:
 
     - name: build
       run: |
-        mvn package
+        mvn compile test-compile
+    
+    - name: test
+      run: |
+        mvn test
+        
