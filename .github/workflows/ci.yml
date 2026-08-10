@@ -36,6 +36,8 @@ jobs:
         # javac -version
 
         # install maven directly instead of using apt-get because apt-get is outdated
+        echo "$ mvn -v"
+        mvn -v
         mkdir maven
         pushd maven
         wget https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz
