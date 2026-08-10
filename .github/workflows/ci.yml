@@ -14,23 +14,30 @@ jobs:
       run: |
         sudo apt-get update
 
+        echo "available java versions"
         update-alternatives --display java
         echo "$ java -version"
-        java -version # confirmation
+        java -version
         echo "$ javac -version"
-        javac -version # confirmation
+        javac -version
 
         sudo apt-get install -y openjdk-18-jdk-headless
+        export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64
+        echo "$ echo $JAVA_HOME"
+        echo $JAVA_HOME
+        export PATH=$PATH:$JAVA_HOME/bin
+        echo "$ echo $PATH"
+        echo $PATH
 
         update-alternatives --display java
         echo "$ java -version"
-        java -version # confirmation
+        java -version
         echo "$ javac -version"
-        javac -version # confirmation
-        
+        javac -version
+
         sudo apt-get install -y maven
         echo "$ mvn -v"
-        mvn -v # confirmation
+        mvn -v
 
     - name: build
       run: |
