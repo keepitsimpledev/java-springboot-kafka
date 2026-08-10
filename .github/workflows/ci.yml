@@ -35,20 +35,20 @@ jobs:
         # echo "$ javac -version"
         # javac -version
 
-        # # install maven directly instead of using apt-get because apt-get is outdated
-        # mkdir maven
-        # pushd maven
-        # wget https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz
-        # tar -xvf apache-maven-3.9.16-bin.tar.gz
-        # export PATH=apache-maven-3.8.6/bin:$PATH
-        # echo "$ mvn -v"
-        # mvn -v
-        # popd
+        # install maven directly instead of using apt-get because apt-get is outdated
+        mkdir maven
+        pushd maven
+        wget https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz
+        tar -xvf apache-maven-3.9.16-bin.tar.gz
+        export PATH=apache-maven-3.8.6/bin:$PATH
+        echo "$ mvn -v"
+        mvn -v
+        popd
 
     - name: build
       run: |
         echo $NAME
-        # mvn -v
+        mvn -v
         # mvn compile test-compile
     
     # - name: test
