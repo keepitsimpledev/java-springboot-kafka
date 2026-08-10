@@ -12,31 +12,31 @@ jobs:
 
     - name: setup env
       run: |
+        sudo apt-get update
+
+        sudo apt-get install -y openjdk-18-jdk-headless
+        sudo update-alternatives --set java /usr/lib/jvm/java-18-openjdk-amd64/bin/java
+        sudo update-alternatives --set javac /usr/lib/jvm/java-18-openjdk-amd64/bin/javac
+        # echo `$ echo $JAVA_HOME`
+        # echo $JAVA_HOME
+        # export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64
+        # echo `$ echo $JAVA_HOME`
+        # echo $JAVA_HOME
+        # export PATH=$PATH:$JAVA_HOME/bin
+
+        update-alternatives --display java
+        echo "$ java -version"
+        java -version
+        echo "$ javac -version"
+        javac -version
+
         mkdir maven
         pushd maven
         wget https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz
         tar -xvf apache-maven-3.9.16-bin.tar.gz
         export PATH=apache-maven-3.8.6/bin:$PATH
         mvn -v
-        
-
-        # sudo apt-get update
-
-        # sudo apt-get install -y openjdk-18-jdk-headless
-        # sudo update-alternatives --set java /usr/lib/jvm/java-18-openjdk-amd64/bin/java
-        # sudo update-alternatives --set javac /usr/lib/jvm/java-18-openjdk-amd64/bin/javac
-        # # echo `$ echo $JAVA_HOME`
-        # # echo $JAVA_HOME
-        # # export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64
-        # # echo `$ echo $JAVA_HOME`
-        # # echo $JAVA_HOME
-        # # export PATH=$PATH:$JAVA_HOME/bin
-
-        # update-alternatives --display java
-        # echo "$ java -version"
-        # java -version
-        # echo "$ javac -version"
-        # javac -version
+        popd maven
 
         # sudo apt-get install -y maven
         # echo "$ mvn -v"
