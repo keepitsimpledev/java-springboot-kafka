@@ -17,15 +17,15 @@ jobs:
         sudo apt-get install -y openjdk-17-jdk-headless
         sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
         sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
-        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 # need to update JAVA_HOME to be recognized by maven
+
+        # need to update JAVA_HOME to be recognized by maven
+        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
         echo `$ echo $JAVA_HOME`
         echo $JAVA_HOME
-        export PATH=$PATH:$JAVA_HOME/bin
-        echo export $PATH >> ~/.bashrc
-        echo "-----------------------------------------------------------kenny"
-        cat ~/.bashrc
-        echo "-----------------------------------------------------------kenny"
+        echo export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 >> ~/.bashrc
 
+        export PATH=$PATH:$JAVA_HOME/bin
+        echo export PATH=$PATH:$JAVA_HOME/bin >> ~/.bashrc
 
         update-alternatives --display java
         echo "$ java -version"
