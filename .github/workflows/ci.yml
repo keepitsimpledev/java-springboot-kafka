@@ -11,13 +11,11 @@ jobs:
     - uses: actions/checkout@v7
 
     - name: setup env
+      id: setupEnv
       run: |
-        export NAME=dev
-        echo $NAME
         # sudo apt-get update
 
         # sudo apt-get install -y openjdk-17-jdk-headless
-        update-alternatives --display java
         # sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
         # sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
 
@@ -49,14 +47,18 @@ jobs:
         # tar -xvf apache-maven-3.9.16-bin.tar.gz
         # export PATH=apache-maven-3.9.16/bin:$PATH
         # echo "$ mvn -v"
-        mvn -v
+        # mvn -v
         # popd
+      outputs:
+        javaHome: kenny
 
     - name: build
+      with:
+        javaHome: ${{ steps.setupEnv.outputs.javaHome }}
       run: |
-        echo $NAME
-        mvn -v
-        update-alternatives --display java
+        echo $javaHome
+        # mvn -v
+        # update-alternatives --display java
         # mvn compile test-compile
     
     # - name: test
