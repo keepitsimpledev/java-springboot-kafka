@@ -57,8 +57,7 @@ jobs:
     - name: build
       run: |
         mvn -v
-        # update-alternatives --display java
-        # mvn compile test-compile
+        mvn compile test-compile
     
     # - name: test
     #   run: |
