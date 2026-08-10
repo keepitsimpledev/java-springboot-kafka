@@ -40,6 +40,7 @@ jobs:
 
     - name: build
       run: |
+        mvn -v
         mvn compile test-compile
     
     - name: test
