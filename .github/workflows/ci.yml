@@ -36,7 +36,7 @@ jobs:
         tar -xvf apache-maven-3.9.16-bin.tar.gz
         export PATH=apache-maven-3.8.6/bin:$PATH
         mvn -v
-        popd maven
+        popd
 
         # sudo apt-get install -y maven
         # echo "$ mvn -v"
