@@ -17,9 +17,7 @@ jobs:
         sudo apt-get install -y openjdk-18-jdk-headless
         sudo update-alternatives --set java /usr/lib/jvm/java-18-openjdk-amd64/bin/java
         sudo update-alternatives --set javac /usr/lib/jvm/java-18-openjdk-amd64/bin/javac
-        echo `$ echo $JAVA_HOME`
-        echo $JAVA_HOME
-        export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64
+        export JAVA_HOME=/usr/lib/jvm/java-18-openjdk-amd64 # need to update JAVA_HOME to be recognized by maven
         echo `$ echo $JAVA_HOME`
         echo $JAVA_HOME
         export PATH=$PATH:$JAVA_HOME/bin
@@ -30,22 +28,20 @@ jobs:
         echo "$ javac -version"
         javac -version
 
+        # install maven directly instead of using apt-get because apt-get is outdated
         mkdir maven
         pushd maven
         wget https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz
         tar -xvf apache-maven-3.9.16-bin.tar.gz
         export PATH=apache-maven-3.8.6/bin:$PATH
+        echo "$ mvn -v"
         mvn -v
         popd
 
-        # sudo apt-get install -y maven
-        # echo "$ mvn -v"
-        # mvn -v
-
-    # - name: build
-    #   run: |
-    #     mvn compile test-compile
+    - name: build
+      run: |
+        mvn compile test-compile
     
-    # - name: test
-    #   run: |
-    #     mvn test
+    - name: test
+      run: |
+        mvn test
