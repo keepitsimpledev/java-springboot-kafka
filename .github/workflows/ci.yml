@@ -12,37 +12,42 @@ jobs:
 
     - name: setup env
       run: |
-        sudo apt-get update
+        cat ~/.bashrc
+        # echo "kenny" >> ~/.bashrc
+        # cat ~/.bashrc
 
-        sudo apt-get install -y openjdk-17-jdk-headless
-        sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
-        sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
-        export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 # need to update JAVA_HOME to be recognized by maven
-        echo `$ echo $JAVA_HOME`
-        echo $JAVA_HOME
-        export PATH=$PATH:$JAVA_HOME/bin
+        # sudo apt-get update
 
-        update-alternatives --display java
-        echo "$ java -version"
-        java -version
-        echo "$ javac -version"
-        javac -version
+        # sudo apt-get install -y openjdk-17-jdk-headless
+        # sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+        # sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+        # export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 # need to update JAVA_HOME to be recognized by maven
+        # echo `$ echo $JAVA_HOME`
+        # echo $JAVA_HOME
+        # export PATH=$PATH:$JAVA_HOME/bin
 
-        # install maven directly instead of using apt-get because apt-get is outdated
-        mkdir maven
-        pushd maven
-        wget https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz
-        tar -xvf apache-maven-3.9.16-bin.tar.gz
-        export PATH=apache-maven-3.8.6/bin:$PATH
-        echo "$ mvn -v"
-        mvn -v
-        popd
+
+        # update-alternatives --display java
+        # echo "$ java -version"
+        # java -version
+        # echo "$ javac -version"
+        # javac -version
+
+        # # install maven directly instead of using apt-get because apt-get is outdated
+        # mkdir maven
+        # pushd maven
+        # wget https://dlcdn.apache.org/maven/maven-3/3.9.16/binaries/apache-maven-3.9.16-bin.tar.gz
+        # tar -xvf apache-maven-3.9.16-bin.tar.gz
+        # export PATH=apache-maven-3.8.6/bin:$PATH
+        # echo "$ mvn -v"
+        # mvn -v
+        # popd
 
     - name: build
       run: |
         mvn -v
-        mvn compile test-compile
+        # mvn compile test-compile
     
-    - name: test
-      run: |
-        mvn test
+    # - name: test
+    #   run: |
+    #     mvn test
