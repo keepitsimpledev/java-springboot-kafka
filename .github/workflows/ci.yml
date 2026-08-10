@@ -14,11 +14,11 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y openjdk-18-jdk-headless
-        sudo apt-get install -y maven
         echo "$ java -version"
         java -version # confirmation
         echo "$ javac -version"
         javac -version # confirmation
+        sudo apt-get install -y maven
         echo "$ mvn -v"
         mvn -v # confirmation
 
@@ -29,4 +29,3 @@ jobs:
     - name: test
       run: |
         mvn test
-        
