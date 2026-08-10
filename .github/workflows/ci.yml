@@ -36,6 +36,10 @@ jobs:
 
     - name: build
       run: |
+        echo "$ java -version"
+        java -version
+        echo "$ javac -version"
+        javac -version
         mvn compile test-compile
     
     - name: test
