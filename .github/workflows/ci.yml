@@ -9,6 +9,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v7
+    - uses: actions/setup-java@v5
+      with:
+        distribution: openjdk
+        java-version: '17'  
 
     - name: setup env
       id: setupEnv
@@ -30,9 +34,9 @@ jobs:
 
         # update-alternatives --display java
         # echo "$ java -version"
-        # java -version
+        java -version
         # echo "$ javac -version"
-        # javac -version
+        javac -version
 
         # install maven directly instead of using apt-get because apt-get is outdated
         # echo "$ mvn -v"
@@ -49,12 +53,8 @@ jobs:
         # echo "$ mvn -v"
         # mvn -v
         # popd
-      outputs:
-        javaHome: kenny
 
     - name: build
-      with:
-        javaHome: ${{ steps.setupEnv.outputs.javaHome }}
       run: |
         echo $javaHome
         # mvn -v
