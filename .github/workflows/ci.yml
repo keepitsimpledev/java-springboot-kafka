@@ -16,6 +16,7 @@ jobs:
 
         sudo apt-get install -y openjdk-18-jdk-headless
         sudo update-alternatives --set java /usr/lib/jvm/java-18-openjdk-amd64/bin/java
+        sudo update-alternatives --set javac /usr/lib/jvm/java-18-openjdk-amd64/bin/javac
 
         update-alternatives --display java
         echo "$ java -version"
