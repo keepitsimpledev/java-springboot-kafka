@@ -51,13 +51,12 @@ jobs:
         # tar -xvf apache-maven-3.9.16-bin.tar.gz
         # export PATH=apache-maven-3.9.16/bin:$PATH
         # echo "$ mvn -v"
-        # mvn -v
+        mvn -v
         # popd
 
     - name: build
       run: |
-        echo $javaHome
-        # mvn -v
+        mvn -v
         # update-alternatives --display java
         # mvn compile test-compile
     
