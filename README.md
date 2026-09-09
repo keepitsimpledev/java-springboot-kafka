@@ -18,3 +18,4 @@ references:
 * https://www.geeksforgeeks.org/blogs/how-to-learn-apache-kafka/
 * https://www.baeldung.com/spring-kafka
 * https://developer.confluent.io/get-started/java/
+* https://docs.docker.com/engine/install/ubuntu/

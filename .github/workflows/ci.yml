@@ -9,19 +9,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v7
-
-    - name: setup env
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y openjdk-18-jdk-headless
-        sudo apt-get install -y maven
-        echo "$ java -version"
-        java -version # confirmation
-        echo "$ javac -version"
-        javac -version # confirmation
-        echo "$ mvn -v"
-        mvn -v # confirmation
+    - uses: actions/setup-java@v5
+      with:
+        distribution: temurin
+        java-version: '17'
 
     - name: build
       run: |
-        mvn package
+        mvn -v
+        mvn compile test-compile
+    
+    - name: test
+      run: |
+        mvn test
