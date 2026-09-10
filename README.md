@@ -10,7 +10,11 @@ this is an exploration of kafka using springboot.
 
 * to build project:
   ```
-  $ mvn package
+  $ mvn clean package
+  ```
+* to run project:
+  ```
+  $ mvn spring-boot:run
   ```
 
 references:
@@ -19,6 +23,7 @@ references:
 * https://www.baeldung.com/spring-kafka
 * https://developer.confluent.io/get-started/java/
 * https://docs.docker.com/engine/install/ubuntu/
+* https://www.baeldung.com/dockerizing-spring-boot-application
 
 docker commands
 ```
@@ -26,8 +31,21 @@ sudo docker run --name kcon -dit ubuntu:22.04 # `-dit` is detached interactive t
 sudo docker ps # same as sudo docker container ls. add `-a` to see stopped containers
 
 sudo docker exec -it kcon sh -c "mkdir kfol" # executes `mkdir kfol` on the container named kcon
+sudo docker cp LICENSE kcon:/kfol
+sudo docker exec -it kcon sh -c "ls kfol"
 
 sudo docker attach kcon # then quit without exiting with CTRL+p, CTRL+q
 sudo docker start kcon
 sudo docker stop kcon
+```
+
+[dockerization](https://adoptium.net/installation/containers):
+```
+docker pull eclipse-temurin:17-jdk
+mvn clean package
+docker build --tag=exploration:latest .
+docker run --name dkcon -d -p8887:8888 exploration:latest
+ss -ltn # checks port listeners
+docker stop dkcon
+docker rm dkcon
 ```
