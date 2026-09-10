@@ -46,6 +46,7 @@ mvn clean package
 docker build --tag=exploration:latest .
 docker run --name dkcon -d -p8887:8888 exploration:latest
 ss -ltn # checks port listeners
+curl localhost:8887
 docker stop dkcon
 docker rm dkcon
 ```
