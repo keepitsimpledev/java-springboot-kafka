@@ -41,12 +41,12 @@ sudo docker stop kcon
 
 [dockerization](https://adoptium.net/installation/containers):
 ```
-docker pull eclipse-temurin:17-jdk
+sudo docker pull eclipse-temurin:17-jdk
 mvn clean package
-docker build --tag=exploration:latest .
-docker run --name dkcon -d -p8887:8888 exploration:latest
+sudo docker build --tag=exploration:latest .
+sudo docker run --name dkcon -d -p8887:8888 exploration:latest
 ss -ltn # checks port listeners
 curl localhost:8887
-docker stop dkcon
-docker rm dkcon
+sudo docker stop dkcon
+sudo docker rm dkcon
 ```
