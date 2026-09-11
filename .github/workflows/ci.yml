@@ -39,9 +39,9 @@ jobs:
         echo "host: curl localhost:8887"
         curl localhost:8887
         sleep 1
+        sudo docker exec -i basic sh -c "apt-get update"
+        sudo docker exec -i basic sh -c "apt-get install -y curl"
         echo "basic: curl 172.17.0.2:8888"
-        sudo docker exec -i basic sh -c "apt update"
-        sudo docker exec -i basic sh -c "apt install -y curl"
         sudo docker exec -i basic sh -c "curl 172.17.0.2:8888"
         sudo docker stop dkcon
         sudo docker rm dkcon
