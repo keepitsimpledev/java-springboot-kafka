@@ -44,4 +44,6 @@ jobs:
         echo "basic: curl 172.17.0.2:8888"
         sudo docker exec -i basic sh -c "curl 172.17.0.2:8888"
         sudo docker stop dkcon
+        sudo docker stop basic
         sudo docker rm dkcon
+        sudo docker rm basic
