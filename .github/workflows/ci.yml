@@ -37,6 +37,6 @@ jobs:
         sudo docker inspect dkcon | grep IPAddress
         sudo docker inspect basic | grep IPAddress
         curl localhost:8887
-        sudo docker exec -it basic sh -c "curl 172.17.0.2:8887"
+        sudo docker exec -it basic sh -c "curl 172.17.0.2:8888"
         sudo docker stop dkcon
         sudo docker rm dkcon
