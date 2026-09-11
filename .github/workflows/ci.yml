@@ -30,18 +30,14 @@ jobs:
         mvn package
         sudo docker build --tag=exploration:latest .
         sudo docker run --name dkcon -d -p8887:8888 exploration:latest
-        sudo docker container ls -a
-        ss -ltn # checks port listeners
         sudo docker run -dit --name basic ubuntu:22.04
-        sleep 10
+        sudo docker container ls -a
+        sleep 5
+        echo "container.dkcon IP address:"
         sudo docker inspect dkcon | grep IPAddress
-        sudo docker inspect basic | grep IPAddress
-        echo "host: curl localhost:8887"
-        curl localhost:8887
-        sleep 1
         sudo docker exec -i basic sh -c "apt-get update"
         sudo docker exec -i basic sh -c "apt-get install -y curl"
-        echo "basic: curl 172.17.0.2:8888"
+        echo "container.basic$ curl 172.17.0.2:8888"
         sudo docker exec -i basic sh -c "curl 172.17.0.2:8888"
         sudo docker stop dkcon
         sudo docker stop basic
