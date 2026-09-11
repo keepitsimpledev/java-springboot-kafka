@@ -30,6 +30,7 @@ jobs:
         mvn package
         sudo docker build --tag=exploration:latest .
         sudo docker run --name dkcon -d -p8887:8888 exploration:latest
+        sudo docker container ls -a
         ss -ltn # checks port listeners
         sleep 15
         curl localhost:8887
