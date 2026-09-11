@@ -32,7 +32,10 @@ jobs:
         sudo docker run --name dkcon -d -p8887:8888 exploration:latest
         sudo docker container ls -a
         ss -ltn # checks port listeners
+        sudo docker run --name basic -d --entrypoint bash
         sleep 15
+        sudo docker inspect dkcon | grep IPAddress
+        sudo docker inspect basic | grep IPAddress
         curl localhost:8887
         sudo docker stop dkcon
         sudo docker rm dkcon
