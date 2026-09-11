@@ -13,10 +13,6 @@ jobs:
       with:
         distribution: temurin
         java-version: '17'
-    
-    - name: dock
-      run: |
-        docker --version
 
     - name: build
       run: |
@@ -26,3 +22,15 @@ jobs:
     - name: test
       run: |
         mvn test
+    
+    - name: dock
+      run: |
+        docker -v
+        sudo docker pull eclipse-temurin:17-jdk
+        mvn package
+        sudo docker build --tag=exploration:latest .
+        sudo docker run --name dkcon -d -p8887:8888 exploration:latest
+        ss -ltn # checks port listeners
+        curl localhost:8887
+        sudo docker stop dkcon
+        sudo docker rm dkcon
