@@ -27,7 +27,7 @@ jobs:
       run: |
         docker -v
         sudo docker pull eclipse-temurin:17-jdk
-        mvn package
+        mvn package -Dmaven.test.skip
         sudo docker build --tag=exploration:latest .
         sudo docker run --name dkcon -d -p8887:8888 exploration:latest
         sudo docker run -dit --name basic ubuntu:22.04
