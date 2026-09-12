@@ -37,7 +37,7 @@ jobs:
 
         sudo docker container ls -a
 
-        sleep 5
+        sleep 2 # pause, let initialization finalize so IP address is available in next step
 
         echo "container.dkcon IP address:"
         sudo docker inspect dkcon | grep IPAddress

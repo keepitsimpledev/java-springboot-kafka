@@ -1,6 +1,6 @@
 # java-springboot-kafka
 
-this is an exploration of kafka using springboot.
+this is an exploration of kafka using springboot and docker.
 
 ## requirements
 * Java 18
@@ -26,8 +26,9 @@ references:
 * https://www.baeldung.com/dockerizing-spring-boot-application
 * [temurin dockerization](https://adoptium.net/installation/containers)
 
-###example docker commands###
+### example docker commands
 ```
 sudo docker run --name kcon -dit ubuntu:22.04 # `-dit` is detached interactive terminal - the container runs in the background awaiting input
 sudo docker cp LICENSE kcon:/kfol # copy local file to container
 sudo docker ps # same as sudo docker container ls. add `-a` to see stopped containers
+```
