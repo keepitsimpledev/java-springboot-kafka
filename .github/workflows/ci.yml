@@ -23,12 +23,12 @@ jobs:
       run: |
         mvn test
     
-    - name: dock
+    - name: docker
       run: |
         docker -v
         sudo docker pull eclipse-temurin:17-jdk
         mvn package -Dmaven.test.skip
-        
+
         sudo docker build -f app.Dockerfile --tag=exploration:latest .
         sudo docker run -d --name dkcon -p8887:8888 exploration:latest
 
@@ -45,7 +45,8 @@ jobs:
         echo "container.basic$ curl 172.17.0.2:8888"
         sudo docker exec -i basic sh -c "curl 172.17.0.2:8888"
 
-        sudo docker stop dkcon
-        sudo docker stop basic
-        sudo docker rm dkcon
-        sudo docker rm basic
+        # unnecessary
+        # sudo docker stop dkcon
+        # sudo docker stop basic
+        # sudo docker rm dkcon
+        # sudo docker rm basic
