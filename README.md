@@ -35,6 +35,7 @@ sudo docker ps # same as sudo docker container ls. add `-a` to see stopped conta
 
 
 #### notes for https://kafka.apache.org/quickstart/
+```
 sudo docker pull apache/kafka:4.3.1
 sudo docker run -dit --name kafka1 -p 9092:9092 apache/kafka:4.3.1
 
@@ -75,3 +76,4 @@ sudo docker exec -i kafka1 sh -c "/opt/kafka/bin/kafka-console-consumer.sh --boo
 
 sudo docker exec -i kafka1 sh -c 'echo -e "another line" > /home/appuser/k/test.txt'
 sudo docker exec -i kafka1 sh -c "cat /home/appuser/k/test.sink.txt"
+```
