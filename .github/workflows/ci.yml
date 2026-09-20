@@ -31,6 +31,7 @@ jobs:
 
         sudo docker build -f app.Dockerfile --tag=exploration:latest .
         sudo docker run -d --name dkcon -p8887:8888 exploration:latest
+        curl localhost:8887
 
         sudo docker build -f basic.Dockerfile --tag=basic:latest .
         sudo docker run -dit --name basic basic:latest
