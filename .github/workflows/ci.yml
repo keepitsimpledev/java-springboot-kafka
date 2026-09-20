@@ -17,7 +17,7 @@ jobs:
     - name: build
       run: |
         mvn -v
-        mvn compile test-compile
+        mvn clean compile test-compile
     
     - name: test
       run: |
@@ -27,11 +27,11 @@ jobs:
       run: |
         docker -v
         sudo docker pull eclipse-temurin:17-jdk
-        mvn package -Dmaven.test.skip
+        mvn clean compile test-compile package
 
         sudo docker build -f app.Dockerfile --tag=exploration:latest .
         sudo docker run -d --name dkcon -p8887:8888 exploration:latest
-        sleep 5 # allow time for initialization
+        sleep 2 # allow time for initialization
         curl localhost:8887
 
         sudo docker build -f basic.Dockerfile --tag=basic:latest .
