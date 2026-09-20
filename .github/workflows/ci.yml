@@ -17,7 +17,7 @@ jobs:
     - name: build
       run: |
         mvn -v
-        mvn clean compile test-compile
+        mvn compile test-compile
     
     - name: test
       run: |
@@ -27,7 +27,7 @@ jobs:
       run: |
         docker -v
         sudo docker pull eclipse-temurin:17-jdk
-        mvn clean compile test-compile package
+        mvn package -Dmaven.test.skip
 
         sudo docker build -f app.Dockerfile --tag=exploration:latest .
         sudo docker run -d --name dkcon -p8887:8888 exploration:latest
