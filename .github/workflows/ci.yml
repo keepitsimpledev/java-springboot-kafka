@@ -26,6 +26,10 @@ jobs:
     - name: docker
       run: |
         docker -v
+
+        sudo docker pull apache/kafka:4.3.1
+        sudo docker run -dit --name kafka1 -p 9092:9092 apache/kafka:4.3.1
+
         sudo docker pull eclipse-temurin:17-jdk
         mvn package -Dmaven.test.skip
 
@@ -44,8 +48,8 @@ jobs:
         echo "container.dkcon IP address:"
         sudo docker inspect dkcon | grep IPAddress
 
-        echo "container.basic$ curl 172.17.0.2:8888"
-        sudo docker exec -i basic sh -c "curl 172.17.0.2:8888"
+        echo "container.basic$ curl 172.17.0.3:8888"
+        sudo docker exec -i basic sh -c "curl 172.17.0.3:8888"
 
         # unnecessary
         # sudo docker stop dkcon
