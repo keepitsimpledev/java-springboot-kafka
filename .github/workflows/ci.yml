@@ -45,14 +45,14 @@ jobs:
         sudo docker container ls -a # equivalent to legacy `sudo docker ps -a`
 
         echo "k1"
-        CURL_DKCON=$(curl --silent --fail localhost:8887)
+        CURL_DKCON=$(curl --silent --fail localhost:8887) || true # `|| true` will prevent failure, allowing retry
         echo "k2"
         CURL_DKCON_LENGTH=${#CURL_DKCON}
         if [ $CURL_DKCON_LENGTH -gt 0 ]; then
           echo "k3"
           CURL_DKCON_SUCCESS=true
           echo "container dkcon successfully initalized"
-          localhost:8887
+          curl localhost:8887
         else
           echo "k4"
           CURL_DKCON_SUCCESS=false
@@ -65,7 +65,7 @@ jobs:
             echo "wait 3 seconds"
             sleep 3
             echo "waited a total of $((i*3)) seconds - checking"
-            CURL_DKCON=$(curl --silent --fail localhost:8887)
+            CURL_DKCON=$(curl --silent --fail localhost:8887) || true # `|| true` will prevent failure,
             CURL_DKCON_LENGTH=${#CURL_DKCON}
             if [ $CURL_DKCON_LENGTH -gt 0 ]; then
               CURL_DKCON_SUCCESS=true
