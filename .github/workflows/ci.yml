@@ -29,16 +29,19 @@ jobs:
 
         # launch containers
 
-        sudo docker pull apache/kafka:4.3.1
-        sudo docker run -dit --name kafka1 -p 9092:9092 apache/kafka:4.3.1
+        ls -al
+        pwd
 
-        sudo docker pull eclipse-temurin:17-jdk
-        mvn package -Dmaven.test.skip
-        sudo docker build -f app.Dockerfile --tag=exploration:latest .
-        sudo docker run -d --name dkcon -p8887:8888 exploration:latest
+        # sudo docker pull apache/kafka:4.3.1
+        # sudo docker run -dit --name kafka1 -p 9092:9092 apache/kafka:4.3.1
 
-        sudo docker build -f basic.Dockerfile --tag=basic:latest .
-        sudo docker run -dit --name basic basic:latest
+        # sudo docker pull eclipse-temurin:17-jdk
+        # mvn package -Dmaven.test.skip
+        # sudo docker build -f app.Dockerfile --tag=exploration:latest .
+        # sudo docker run -d --name dkcon -p8887:8888 exploration:latest
+
+        # sudo docker build -f basic.Dockerfile --tag=basic:latest .
+        # sudo docker run -dit --name basic basic:latest
 
         # check containers
 
