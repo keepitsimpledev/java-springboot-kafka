@@ -35,7 +35,8 @@ jobs:
 
         sudo docker build -f app.Dockerfile --tag=exploration:latest .
         sudo docker run -d --name dkcon -p8887:8888 exploration:latest
-        sleep 5 # consider healthcheck instead? https://stackoverflow.com/questions/57515333/how-to-do-a-health-check-of-a-spring-boot-application-running-in-a-docker-contai
+        sleep 25 # consider healthcheck instead? https://stackoverflow.com/questions/57515333/how-to-do-a-health-check-of-a-spring-boot-application-running-in-a-docker-contai
+        echo "$ localhost:8887"
         curl localhost:8887
 
         sudo docker build -f basic.Dockerfile --tag=basic:latest .
