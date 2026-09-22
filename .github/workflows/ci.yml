@@ -29,36 +29,32 @@ jobs:
 
         # launch containers
 
-        bash .github/workflows/loop.sh
+        sudo docker pull apache/kafka:4.3.1
+        sudo docker run -dit --name kafka1 -p 9092:9092 apache/kafka:4.3.1
 
-        # sudo docker pull apache/kafka:4.3.1
-        # sudo docker run -dit --name kafka1 -p 9092:9092 apache/kafka:4.3.1
+        sudo docker pull eclipse-temurin:17-jdk
+        mvn package -Dmaven.test.skip
+        sudo docker build -f app.Dockerfile --tag=exploration:latest .
+        sudo docker run -d --name dkcon -p8887:8888 exploration:latest
 
-        # sudo docker pull eclipse-temurin:17-jdk
-        # mvn package -Dmaven.test.skip
-        # sudo docker build -f app.Dockerfile --tag=exploration:latest .
-        # sudo docker run -d --name dkcon -p8887:8888 exploration:latest
-
-        # sudo docker build -f basic.Dockerfile --tag=basic:latest .
-        # sudo docker run -dit --name basic basic:latest
+        sudo docker build -f basic.Dockerfile --tag=basic:latest .
+        sudo docker run -dit --name basic basic:latest
 
         # check containers
 
-        # sudo docker container ls -a # equivalent to legacy `sudo docker ps -a`
+        sudo docker container ls -a # equivalent to legacy `sudo docker ps -a`
 
-        # .github/workflows/container-check.sh
+        bash .github/workflows/container-check.sh
 
-        # echo "container dkcon IP address (should be 172.17.0.3):"
-        # sudo docker inspect dkcon | grep IPAddress
+        echo "container dkcon IP address (should be 172.17.0.3):"
+        sudo docker inspect dkcon | grep IPAddress
 
-        # echo "container.kafka1 IP address (should be 172.17.0.2):"
-        # sudo docker inspect kafka1 | grep IPAddress # dkcon successful init indicates kafka1 successful init
+        echo "container.kafka1 IP address (should be 172.17.0.2):"
+        sudo docker inspect kafka1 | grep IPAddress # dkcon successful init indicates kafka1 successful init
 
-        # echo "container.basic$ curl 172.17.0.3:8888"
-        # sudo docker exec -i basic sh -c "curl 172.17.0.3:8888"
+        echo "container.basic$ curl 172.17.0.3:8888"
+        sudo docker exec -i basic sh -c "curl 172.17.0.3:8888"
 
         # unnecessary
-        # sudo docker stop dkcon
-        # sudo docker stop basic
-        # sudo docker rm dkcon
-        # sudo docker rm basic
+        # sudo docker stop dkcon && sudo docker stop basic
+        # sudo docker rm dkcon && sudo docker rm basic

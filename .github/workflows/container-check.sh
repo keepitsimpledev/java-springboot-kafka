@@ -1,5 +1,7 @@
 #!/bin/sh
 
+# consider https://stackoverflow.com/questions/57515333/how-to-do-a-health-check-of-a-spring-boot-application-running-in-a-docker-contai
+
 CURL_DKCON=$(curl --silent --fail localhost:8887) || true # `|| true` will prevent failure, allowing retry
 CURL_DKCON_LENGTH=${#CURL_DKCON}
 if [ $CURL_DKCON_LENGTH -gt 0 ]; then
