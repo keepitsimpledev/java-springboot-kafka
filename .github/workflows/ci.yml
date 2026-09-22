@@ -44,16 +44,21 @@ jobs:
 
         sudo docker container ls -a # equivalent to legacy `sudo docker ps -a`
 
+        echo "k1"
         CURL_DKCON=$(curl --silent --fail localhost:8887)
+        echo "k2"
         CURL_DKCON_LENGTH=${#CURL_DKCON}
         if [ $CURL_DKCON_LENGTH -gt 0 ]; then
+          echo "k3"
           CURL_DKCON_SUCCESS=true
           echo "container dkcon successfully initalized"
           localhost:8887
         else
+          echo "k4"
           CURL_DKCON_SUCCESS=false
           echo "container dkcon not yet initalized"
         fi
+        echo "k5"
         if [ $CURL_DKCON_SUCCESS = false ]; then
           echo "waiting up to 60 seconds for container dkcon to initalize"
           for i in {1..20}; do
