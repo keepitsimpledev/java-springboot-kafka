@@ -1,7 +1,8 @@
 package com.exploration;
-
 import java.util.concurrent.CompletableFuture;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @SpringBootApplication
 public class MyApplication {
+
+	Logger logger = LoggerFactory.getLogger(MyApplication.class);
     
     @Value(value = "${spring.kafka.single-topic-name}")
     private String topicName;
@@ -39,6 +42,11 @@ public class MyApplication {
 
 	@RequestMapping("/")
 	public String home() {
+		logger.trace("A TRACE Message");
+        logger.debug("A DEBUG Message");
+        logger.info("An INFO Message");
+        logger.warn("A WARN Message");
+        logger.error("An ERROR Message");
 		return "Hello World!";
 	}
 
