@@ -43,8 +43,9 @@ public class MyApplication {
 	}
 
 	@RequestMapping("/send/")
-	public void send() {
+	public String send() {
 		sendMessage("kmessage");
+		return "send success.";
 	}
 
 	@KafkaListener(
