@@ -47,21 +47,21 @@ jobs:
 
         sudo docker container ls -a # equivalent to legacy `sudo docker ps -a`
 
-        echo "container kafka1 IP address (should be 172.17.0.2):"
+        echo "container kafka1 IP address (should be 172.18.0.2):"
         sudo docker inspect kafka1 | grep IPAddress
 
-        echo "container dkcon IP address (should be 172.17.0.3):"
+        echo "container dkcon IP address (should be 172.18.0.3):"
         sudo docker inspect dkcon | grep IPAddress
 
-        echo "container basic IP address (should be 172.17.0.4):"
+        echo "container basic IP address (should be 172.18.0.4):"
         sudo docker inspect basic | grep IPAddress
 
         bash .github/workflows/check-dkcon.sh # dkcon successful init indicates kafka1 successful init
         sudo docker exec -i dkcon sh -c "cat logs/app.log"
 
         # call dcon from basic to confirm container accessibility
-        echo "container basic$ curl 172.17.0.3:8888"
-        sudo docker exec -i basic sh -c "curl 172.17.0.3:8888"
+        echo "container basic$ curl 172.18.0.3:8888"
+        sudo docker exec -i basic sh -c "curl 172.18.0.3:8888"
 
         curl http://localhost/send/
         curl http://localhost/messages/
