@@ -63,11 +63,11 @@ jobs:
         echo "container basic$ curl dkcon:8888"
         sudo docker exec -i basic sh -c "curl dkcon:8888"
 
-        curl http://localhost/send/
-        curl http://localhost/messages/
-        curl http://localhost/send/
-        curl http://localhost/messages/
-
+        sudo docker exec -i basic sh -c "curl http://dkcon:8888/send/"
+        sudo docker exec -i basic sh -c "curl http://dkcon:8888/messages/"
+        sudo docker exec -i basic sh -c "curl http://dkcon:8888/send/"
+        sudo docker exec -i basic sh -c "curl http://dkcon:8888/messages/"
+        
         # unnecessary
         # sudo docker stop dkcon && sudo docker stop basic
         # sudo docker rm dkcon && sudo docker rm basic
