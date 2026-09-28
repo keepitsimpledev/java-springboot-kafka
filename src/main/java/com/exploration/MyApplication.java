@@ -24,9 +24,8 @@ public class MyApplication {
     @Value(value = "${spring.kafka.single-topic-name}")
     private String topicName;
 
-	private final List<String> messages;
-
 	private final KafkaTemplate<String, String> kafkaTemplate;
+	private final List<String> messages;
 
 	public MyApplication(KafkaTemplate<String, String> kafkaTemplate, List<String> messages) {
 		this.kafkaTemplate = kafkaTemplate;
@@ -37,33 +36,35 @@ public class MyApplication {
 		CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(topicName, message);
 		future.whenComplete((result, ex) -> {
 			if (ex == null) {
-				System.out.println("Sent message=[" + message + 
-				"] with offset=[" + result.getRecordMetadata().offset() + "]");
+				String logMsg = String.format("Sent message=[%s] with offset=[%d]",
+						message, result.getRecordMetadata().offset());
+				System.out.println(logMsg);
+				logger.info(logMsg);
 			} else {
-				System.out.println("Unable to send message=[" + 
-					message + "] due to : " + ex.getMessage());
+				String logMsg = String.format("Unable to send message=[%s] due to : %s",
+						message, ex.getMessage());
+				System.out.println(logMsg);
+				logger.error(logMsg);
 			}
 		});
 	}
 
 	@RequestMapping("/")
 	public String home() {
-		logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");
+        logger.debug("start: home()");
 		return "Hello World!";
 	}
 
 	@RequestMapping("/send/")
 	public String send() {
+        logger.debug("start: send()");
 		sendMessage("kmessage");
 		return "send success.";
 	}
 
 	@RequestMapping("/messages/")
 	public String messages() {
+        logger.debug("start: messages()");
 		String out = String.format("num messages: %d\n", messages.size());
 		out += messages.stream().collect(Collectors.joining("; "));
 		return out;
@@ -73,12 +74,13 @@ public class MyApplication {
 		topics = "ktopic", // application.properties.spring.kafka.single-topic-name
 		groupId = "11") // application.properties.spring.kafka.group-id
 	public void listenGroupFoo(String message) {
-		System.out.println("Received Message in group foo: " + message);
+		String logMsg = "Received Message in group foo: " + message;
+		System.out.println(logMsg);
+		logger.info(logMsg);
 		messages.add(message);
 	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyApplication.class, args);
 	}
-
 }
