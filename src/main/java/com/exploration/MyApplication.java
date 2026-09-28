@@ -1,5 +1,8 @@
 package com.exploration;
+
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,10 +24,13 @@ public class MyApplication {
     @Value(value = "${spring.kafka.single-topic-name}")
     private String topicName;
 
+	private final List<String> messages;
+
 	private final KafkaTemplate<String, String> kafkaTemplate;
 
-	public MyApplication(KafkaTemplate<String, String> kafkaTemplate) {
+	public MyApplication(KafkaTemplate<String, String> kafkaTemplate, List<String> messages) {
 		this.kafkaTemplate = kafkaTemplate;
+		this.messages = messages;
 	}
 
 	public void sendMessage(String message) {
@@ -56,11 +62,19 @@ public class MyApplication {
 		return "send success.";
 	}
 
+	@RequestMapping("/messages/")
+	public String messages() {
+		String out = String.format("num messages: %d\n", messages.size());
+		out += messages.stream().collect(Collectors.joining("; "));
+		return out;
+	}
+
 	@KafkaListener(
 		topics = "ktopic", // application.properties.spring.kafka.single-topic-name
 		groupId = "11") // application.properties.spring.kafka.group-id
 	public void listenGroupFoo(String message) {
 		System.out.println("Received Message in group foo: " + message);
+		messages.add(message);
 	}
 
 	public static void main(String[] args) {
