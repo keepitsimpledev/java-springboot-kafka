@@ -26,27 +26,49 @@ jobs:
     - name: docker
       run: |
         docker -v
+
+        # launch containers
+
+        sudo docker network create knet
+
+        sudo docker pull apache/kafka:4.3.1
+        sudo docker build -f kafka.Dockerfile --tag=kafka1:latest .
+        sudo docker run -d --network knet --name kafka1 kafka1:latest
+
         sudo docker pull eclipse-temurin:17-jdk
         mvn package -Dmaven.test.skip
-
         sudo docker build -f app.Dockerfile --tag=exploration:latest .
-        sudo docker run -d --name dkcon -p8887:8888 exploration:latest
+        sudo docker run -d --network knet --name dkcon -p8887:8888 exploration:latest
 
         sudo docker build -f basic.Dockerfile --tag=basic:latest .
-        sudo docker run -dit --name basic basic:latest
+        sudo docker run -dit --network knet --name basic basic:latest
 
-        sudo docker container ls -a
+        # check containers
 
-        sleep 2 # pause, let initialization finalize so IP address is available in next step
+        sudo docker container ls -a # equivalent to legacy `sudo docker ps -a`
 
-        echo "container.dkcon IP address:"
-        sudo docker inspect dkcon | grep IPAddress
+        # echo "container kafka1 IP address (should be 172.18.0.2):"
+        # sudo docker inspect kafka1 | grep IPAddress
 
-        echo "container.basic$ curl 172.17.0.2:8888"
-        sudo docker exec -i basic sh -c "curl 172.17.0.2:8888"
+        # echo "container dkcon IP address (should be 172.18.0.3):"
+        # sudo docker inspect dkcon | grep IPAddress
 
+        # echo "container basic IP address (should be 172.18.0.4):"
+        # sudo docker inspect basic | grep IPAddress
+
+        bash .github/workflows/check-dkcon.sh # dkcon successful init indicates kafka1 successful init
+        sudo docker exec -i dkcon sh -c "cat logs/app.log"
+
+        # call dkcon from basic to confirm container accessibility
+        echo "container basic$ curl dkcon:8888"
+        sudo docker exec -i basic sh -c "curl dkcon:8888"
+
+        # run behavior test
+        sudo docker exec -i basic sh -c "curl http://dkcon:8888/send/"
+        sudo docker exec -i basic sh -c "curl http://dkcon:8888/messages/"
+        sudo docker exec -i basic sh -c "curl http://dkcon:8888/send/"
+        sudo docker exec -i basic sh -c "curl http://dkcon:8888/messages/"
+        
         # unnecessary
-        # sudo docker stop dkcon
-        # sudo docker stop basic
-        # sudo docker rm dkcon
-        # sudo docker rm basic
+        # sudo docker stop dkcon && sudo docker stop basic
+        # sudo docker rm dkcon && sudo docker rm basic
